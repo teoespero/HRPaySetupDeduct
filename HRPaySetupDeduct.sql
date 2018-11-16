@@ -12,6 +12,7 @@ from tblDistrict
 
 select 
 	(select DistrictId from tblDistrict) as OrgId,
+	cl.ClassDescription,
 	te.EmployeeID as EmpId,
 	te.fullname,
 	te.socsecno,
@@ -70,6 +71,9 @@ inner join
 inner join
 	DS_Global..PyWithholdingType wht
 	on wht.Id = dplan.PyDeductionTypeId
+inner join
+	tblClassifications cl
+	on te.ClassificationId = cl.ClassificationID
 where
 	te.TerminateDate is null
 	and te.EmployeeID > 0
